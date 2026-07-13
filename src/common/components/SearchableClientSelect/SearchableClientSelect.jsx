@@ -9,7 +9,7 @@ export function SearchableClientSelect({ clientes, onSelectClient }) {
 
     const MONO = { fontFamily: "'Share Tech Mono', monospace" };
 
-    // Cerrar el menú si el usuario hace clic fuera del componente
+    
     useEffect(() => {
         function handleClickOutside(event) {
             if (containerRef.current && !containerRef.current.contains(event.target)) {
@@ -20,7 +20,7 @@ export function SearchableClientSelect({ clientes, onSelectClient }) {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    // 🔍 Filtrar los clientes según lo que escribe el usuario (por nombre, DNI o RUC)
+    
     const filteredClientes = clientes ? clientes.filter((c) => {
         const busqueda = query.toLowerCase();
         return (
@@ -32,7 +32,7 @@ export function SearchableClientSelect({ clientes, onSelectClient }) {
 
     const handleSelect = (cliente) => {
         setSelectedName(cliente.nombreCliente);
-        setQuery(""); // Limpiamos el texto de búsqueda
+        setQuery(""); 
         setIsOpen(false);
         if (onSelectClient) onSelectClient(cliente);
     };
@@ -43,7 +43,7 @@ export function SearchableClientSelect({ clientes, onSelectClient }) {
                 Seleccionar Cliente
             </span>
             
-            {/* Contenedor del Input principal */}
+           
             <div className="relative">
                 <input
                     type="text"
@@ -61,7 +61,7 @@ export function SearchableClientSelect({ clientes, onSelectClient }) {
                 </div>
             </div>
 
-            {/* 📋 Desplegable de Opciones */}
+            
             {isOpen && (
                 <div className="absolute z-50 left-0 right-0 mt-1 max-h-60 overflow-y-auto bg-card border border-border shadow-2xl custom-scrollbar">
                     {filteredClientes.length === 0 ? (

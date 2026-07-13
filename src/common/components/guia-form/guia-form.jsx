@@ -158,7 +158,7 @@ export function GuiaForm({data, onEnviar, isSubmitting}){
         <form onSubmit={handleSubmit} className="bg-[#121212] p-6 rounded-lg shadow-xl border border-gray-800">
             <h3 className="text-xl font-bold text-white mb-2">Detalles de la Guia de Remison</h3>
             
-            {/* --- SECCIÓN SOLO LECTURA (PREVIEW) --- */}
+            
             <h4 className={sectionTitleCls}>1. Datos del Cliente y Comprobante (Fijos)</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -198,7 +198,7 @@ export function GuiaForm({data, onEnviar, isSubmitting}){
                             <span className="col-span-2">Descripción</span>
                         </div>
                         
-                        {/* Filas de items */}
+                        
                         {formState.items && formState.items.map((item, index) => (
                             <div key={index} className="grid grid-cols-3 gap-2 px-4 py-2 border-t border-gray-800 text-xs text-gray-300">
                                 <span>{item.cantidad}</span>
@@ -206,7 +206,7 @@ export function GuiaForm({data, onEnviar, isSubmitting}){
                             </div>
                         ))}
                         
-                        {/* Si no hay items */}
+                        
                         {(!formState.items || formState.items.length === 0) && (
                             <p className="px-4 py-3 text-xs text-gray-600 italic">No hay items registrados.</p>
                         )}
@@ -214,7 +214,7 @@ export function GuiaForm({data, onEnviar, isSubmitting}){
                 </div>
             </div>
 
-            {/* --- SECCIÓN EDITABLE (DATOS NUEVOS) --- */}
+            
             <h4 className={sectionTitleCls}>2. Información Adicional Necesaria</h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -290,7 +290,7 @@ export function GuiaForm({data, onEnviar, isSubmitting}){
                 />
             </div>
 
-            {/* --- LISTAS DINÁMICAS --- */}
+            
              {tipoTransporte === "01" && (
                 <>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> 

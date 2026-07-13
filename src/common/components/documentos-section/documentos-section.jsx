@@ -1,6 +1,6 @@
 export function DocumentosSection({ formVenta, handleChange, inputCls, MONO }) {
     return (
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
                 <label className="block text-xs font-mono text-muted-foreground uppercase mb-1.5 tracking-wider">
                     Documento

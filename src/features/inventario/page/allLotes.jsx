@@ -47,8 +47,8 @@ export function AllLotes (){
                     <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.fechaVencimiento}</td>
  
                     <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockLote}</td>
-                    <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockLoteCaja}</td>
-                    <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockLoteCajon}</td>
+                    <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{Number(p.stockLoteCaja).toFixed(2)}</td>
+                    <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{Number(p.stockLoteCajon).toFixed(2)}</td>
 
                   </tr>
                 );

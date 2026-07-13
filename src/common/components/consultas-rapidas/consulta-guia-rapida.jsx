@@ -4,11 +4,11 @@ import { GuiaConsulta } from "../form-guia-consulta/form-consulta-guia";
 export function ConsultaRapidaGuia() {
     const [numero, setNumero] = useState("");
     const [abrirModal, setAbrirModal] = useState(false);
-    const SERIE_FIJA = "T001"; // Serie fija
+    const SERIE_FIJA = "T001";
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Consultando serie T001 y número:", numero); // <-- Verifica si esto sale en consola
+        console.log("Consultando serie T001 y número:", numero);
         if (numero) {
             setAbrirModal(true);
         } else {

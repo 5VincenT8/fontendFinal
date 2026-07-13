@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
-// --- COMPONENTE SECUNDARIO: EL FORMULARIO DE FACTURACIÓN ---
 export function FacturaForm({ data, onEnviar, isSubmitting }) {
     const inputCls = "w-full bg-card border border-border text-foreground placeholder:text-muted-foreground px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors";
     const labelCls = "block text-xs font-semibold mb-1.5 text-gray-400";
     const sectionTitleCls = "col-span-full font-bold text-yellow-500 text-sm tracking-wide uppercase border-b border-gray-800 pb-2 mt-4 mb-2";
     const readOnlyCls = "w-full bg-[#1a1a1a] border border-gray-800 text-gray-500 px-4 py-2.5 text-sm cursor-not-allowed rounded-md";
     
-    // 1. Estado inicial con la estructura requerida por el POST final
+   
     const [formState, setFormState] = useState({
         operacion: "generar_comprobante",
         tipo_de_comprobante: 1,
@@ -63,7 +62,7 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
         venta_al_credito: []
     });
 
-    // 2. Mapeo: Rellenamos el estado cuando llega la data del Preview
+    
     useEffect(() => {
         if (data) {
             setFormState(prev => ({
@@ -109,11 +108,11 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
         }
     }, [data]);
 
-    // --- MANEJO DE VENTAS AL CRÉDITO ---
+    
     const agregarVentaCredito = () => {
         setFormState(prev => ({
             ...prev,
-            // Usamos prev.venta_al_credito.length + 1 para que sea 1, 2, 3...
+            
             venta_al_credito: [
                 ...prev.venta_al_credito, 
                 { cuota: prev.venta_al_credito.length + 1, fecha_de_pago: "", monto: 0 }
@@ -127,7 +126,7 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
         setFormState({...formState, venta_al_credito: nuevasCuotas});
     };
 
-    // --- MANEJO DE GUÍAS ---
+   
     const agregarGuia = () => {
         setFormState(prev => ({
             ...prev,
@@ -144,7 +143,7 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
         if (!isConfirmed) {
         return;
         }
-        // Preparar el objeto final cumpliendo el DTO del backend
+       
         const payload = {
             ...formState,
             venta_al_credito: formState.venta_al_credito.map(c => ({
@@ -166,7 +165,7 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
         <form onSubmit={handleSubmit} className="bg-[#121212] p-6 rounded-lg shadow-xl border border-gray-800">
             <h3 className="text-xl font-bold text-white mb-2">Detalles del Comprobante</h3>
             
-            {/* --- SECCIÓN SOLO LECTURA (PREVIEW) --- */}
+           
             <h4 className={sectionTitleCls}>1. Datos del Cliente y Comprobante (Fijos)</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -191,7 +190,7 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
                 </div>                                                
             </div>
 
-            {/* --- SECCIÓN EDITABLE (DATOS NUEVOS) --- */}
+           
             <h4 className={sectionTitleCls}>2. Información Adicional y Pagos</h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -244,7 +243,7 @@ export function FacturaForm({ data, onEnviar, isSubmitting }) {
                 <input type="text" className={inputCls} placeholder="Observaciones" value={formState.observaciones} onChange={(e) => setFormState({...formState, observaciones: e.target.value})} />
             </div>
 
-            {/* --- LISTAS DINÁMICAS --- */}
+            
             {isCredito === "2" && (
                 <>
                     <h4 className={sectionTitleCls}>3. Ventas al Crédito (Cuotas)</h4>

@@ -22,12 +22,12 @@ export function Root() {
       className="flex h-screen bg-background overflow-hidden"
       style={{ fontFamily: "'Barlow', sans-serif" }}
     >
-      {/* desktop sidebar */}
+      
       <aside className="hidden lg:flex flex-col w-56 shrink-0 bg-card border-r border-border">
         <SideBar/>
       </aside>
 
-      {/* mobile overlay */}
+      
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/60 lg:hidden"
@@ -35,7 +35,7 @@ export function Root() {
         />
       )}
 
-      {/* mobile sidebar */}
+      
       <aside
         className={`fixed top-0 left-0 z-50 h-full w-56 bg-card border-r border-border flex flex-col transition-transform duration-200 lg:hidden ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -44,9 +44,9 @@ export function Root() {
         <SideBar onClose={() => setSidebarOpen(false)} />
       </aside>
 
-      {/* main */}
+     
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        {/* mobile top bar */}
+        
         <div className="lg:hidden flex items-center gap-3 px-4 py-3 border-b border-border bg-card">
           <button
             onClick={() => setSidebarOpen(true)}

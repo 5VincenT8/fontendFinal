@@ -15,7 +15,7 @@ const MONO = { fontFamily: "'Share Tech Mono', monospace" };
 export function VentasPage() {
     const [saved, setSaved] = useState(false);
     
-    // Hooks de consumo de datos
+   
     const { clientes } = useGetAllClients();
     const { products, loading: loadingProds } = useGetReportProducts();
     const { products: productosPrecios } = useGetAllProduts();
@@ -27,7 +27,7 @@ export function VentasPage() {
     const [tmpProducto, setTmpProducto] = useState({ idProducto: "", tipoUnidad: "UNIDAD", cantProducto: "" });
     const [resetProdTrigger, setResetProdTrigger] = useState(false);
 
-    // Manejadores simplificados con funciones flecha de una línea
+   
     const handleClienteSeleccionado = (c) => setFormVenta(p => ({ ...p, idCliente: c.idCliente }));
     const handleChange = (field) => (e) => setFormVenta(p => ({ ...p, [field]: e.target.value }));
     const eliminarDelDetalle = (id) => setFormVenta(p => ({ ...p, detalles: p.detalles.filter(i => i.idProducto !== id) }));
@@ -36,7 +36,7 @@ export function VentasPage() {
         idProducto: p.idProducto || p.idProduct || p.id, tipoUnidad: "UNIDAD", cantProducto: 1
     });
 
-    // ✨ Simplificado usando un objeto de mapeo dinámico
+   
     const obtenerStockDisponible = () => {
         const prod = products?.find(p => String(p.idProduct) === String(tmpProducto.idProducto));
         if (!prod) return 0;
@@ -74,7 +74,7 @@ export function VentasPage() {
             if (await ejecutarPostVenta(payloadFinal)) {
                 setSaved(true);
                 setTimeout(() => setSaved(false), 3000);
-                // Resetea solo lo necesario manteniendo correlativos de boleta/pago anteriores
+                
                 setFormVenta(p => ({ ...p, idCliente: "", detalles: [] }));
             }
         } catch (err) {
@@ -82,43 +82,43 @@ export function VentasPage() {
         }
     };
 
-    // ✨ Simplificado reduciendo la lógica de ifs anidados
-const totalesVisuales = useMemo(() => {
-    if (!formVenta.detalles.length || !productosPrecios) {
-        return { subtotal: 0, igv: 0, total: 0 };
-    }
+   
+    const totalesVisuales = useMemo(() => {
+        if (!formVenta.detalles.length || !productosPrecios) {
+            return { subtotal: 0, igv: 0, total: 0 };
+        }
 
-    let totalAcumulado = 0;
+        let totalAcumulado = 0;
 
-    formVenta.detalles.forEach(item => {
-        const p = productosPrecios.find(prod => String(prod.id) === String(item.idProducto));
-        if (!p) return;
+        formVenta.detalles.forEach(item => {
+            const p = productosPrecios.find(prod => String(prod.id) === String(item.idProducto));
+            if (!p) return;
 
-        // 1. Obtenemos el precio completo de la presentación seleccionada
-        let precioPresentacion = 0;
-        if (item.tipoUnidad === "UNIDAD") precioPresentacion = p.precioUnidad || 0;
-        if (item.tipoUnidad === "CAJA") precioPresentacion = p.precioCaja || 0;
-        if (item.tipoUnidad === "CAJON") precioPresentacion = p.precioCajon || 0;
+            
+            let precioPresentacion = 0;
+            if (item.tipoUnidad === "UNIDAD") precioPresentacion = p.precioUnidad || 0;
+            if (item.tipoUnidad === "CAJA") precioPresentacion = p.precioCaja || 0;
+            if (item.tipoUnidad === "CAJON") precioPresentacion = p.precioCajon || 0;
 
-        // 2. ¡Multiplicación directa! Si son 12 Cajones, multiplicamos PrecioCajón * 12
-        const subtotalDetalle = precioPresentacion * parseInt(item.cantProducto, 10);
-        totalAcumulado += subtotalDetalle;
-    });
+            
+            const subtotalDetalle = precioPresentacion * parseInt(item.cantProducto, 10);
+            totalAcumulado += subtotalDetalle;
+        });
 
-    // 3. Cálculos finales de impuestos a 2 decimales
-    const totalFinal = Math.round(totalAcumulado * 100) / 100; 
-    const gravadoFinal = Math.round((totalFinal / 1.18) * 100) / 100; 
-    const igvFinal = Math.round((totalFinal - gravadoFinal) * 100) / 100; 
+        
+        const totalFinal = Math.round(totalAcumulado * 100) / 100; 
+        const gravadoFinal = Math.round((totalFinal / 1.18) * 100) / 100; 
+        const igvFinal = Math.round((totalFinal - gravadoFinal) * 100) / 100; 
 
-    return {
-        subtotal: gravadoFinal,
-        igv: igvFinal,
-        total: totalFinal
-    };
-}, [formVenta.detalles, productosPrecios]);
+        return {
+            subtotal: gravadoFinal,
+            igv: igvFinal,
+            total: totalFinal
+        };
+    }, [formVenta.detalles, productosPrecios]);
 
     return (
-        <div className="p-6 max-w-3xl mx-auto text-foreground" style={{ fontFamily: "'Barlow', sans-serif" }}>
+        <div className="px-8 max-w-6xl mx-auto text-foreground" style={{ fontFamily: "'Barlow', sans-serif" }}>
             <div className="mb-6">
                 <h1 className="font-black text-2xl tracking-tight">AGREGAR UNA VENTA</h1>
                 <p className="text-muted-foreground text-sm font-mono">NUEVO REGISTRO DE VENTA</p>

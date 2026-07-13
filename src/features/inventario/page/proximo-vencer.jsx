@@ -10,7 +10,7 @@ export function LotesPoximosVencer(){
     const [saved, setSaved] = useState(false);
 
     const [selectedDias, setSelectedDias] = useState("");
-    // 2. Estado real que disparará la búsqueda en el hook
+ 
     const [searchDias, setSearchDias] = useState("");
 
     const { lotesProxVencer, loading, error } = useGetLotesProximosVencer(searchDias);
@@ -26,9 +26,9 @@ export function LotesPoximosVencer(){
     };
     
     return(
-        <div className="p-6 max-w-2xl" style={{ fontFamily: "'Barlow', sans-serif" }}>
+        <div className="p-6 max-w-auto" style={{ fontFamily: "'Barlow', sans-serif" }}>
             <form onSubmit={handleSearch} className="space-y-5">
-            <Field label="Producto">
+            <Field label="INGRESE LOS DIAS">
                 <input className={inputCls}
                     type="number"
                     min="1"
@@ -47,8 +47,8 @@ export function LotesPoximosVencer(){
                 </button>
             </form>
 
-            <div className="border border-border overflow-x-auto">
-                <table className="w-full text-sm min-w-[700px]">
+            <div className="border border-border overflow-x-auto mt-3">
+                <table className="w-full text-sm min-w-[700px] ">
                     <thead>
                         <tr className="border-b border-border bg-muted">
                         {["CÓDIGO", "NOMBRE", "LOTE","FECHA DE VENCIMIENTO", "STOCK TOTAL UNIDAD", "STOCK EN CAJAS","STOCK EN CAJON" ].map((h) => (
@@ -58,14 +58,14 @@ export function LotesPoximosVencer(){
                     </thead>
                     <tbody>
                         {loading ? (
-                            // 1. Si está cargando, muestra este mensaje
+                            
                             <tr>
                                 <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground text-sm" style={MONO}>
                                     CARGANDO LOTES VENCIDOS DESDE EL SERVIDOR...
                                 </td>
                             </tr>
                         ) : filtered.length === 0 ? (
-                            // 2. Si ya terminó de cargar y no hay nada, muestra esto
+                            
                             <tr>
                                 <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground text-sm" style={MONO}>
                                     SIN RESULTADOS

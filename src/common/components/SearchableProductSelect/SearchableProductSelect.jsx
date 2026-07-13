@@ -26,7 +26,7 @@ export function SearchableProductSelect({ productos, onSelectProduct, resetTrigg
         }
     }, [resetTrigger]);
 
-    // 🔍 Filtrar usando la propiedad exacta del backend: 'nombre'
+   
     const filteredProductos = productos ? productos.filter((p) => {
         return p.nombre?.toLowerCase().includes(query.toLowerCase());
     }) : [];

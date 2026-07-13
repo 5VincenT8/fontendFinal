@@ -47,8 +47,8 @@ export function ReporteProducts(){
                             <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.precioUnidad}</td>
                             <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockTotal}</td>
                             <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.nombreCategoria}</td>
-                            <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.totalCajas}</td>
-                            <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.totalCajones}</td>
+                            <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{Number(p.totalCajas).toFixed(2)}</td>
+                            <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{Number(p.totalCajones).toFixed(2)}</td>
                         </tr>
                         );
                     })

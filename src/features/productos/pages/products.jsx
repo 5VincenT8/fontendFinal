@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 import { useCategoriaStore } from "../../categoria/store/categoria-store";
 import { Field } from "../../../common/components/field/field";
 import { createProducto } from "../services/post-product";
@@ -7,6 +7,7 @@ import { createProducto } from "../services/post-product";
 export function ProductPage(){
 
     const [saved, setSaved] = useState(false);
+    const [error, setError] = useState("");
     const [form, setForm] = useState({
         nombreProducto: "",
         marca: "",
@@ -21,20 +22,44 @@ export function ProductPage(){
         
     });
     const { categorias } = useCategoriaStore();
+
     const set = (field) => (e) => {
       setForm({ ...form, [field]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setError("");
+        setSaved(false);
+
+        const isFormEmpty = Object.values(form).some((value) => value === "");
+
+        if (isFormEmpty) {
+          setError("Por favor, completa todos los campos.");
+          return;
+        }
+
         console.log("Datos del producto a enviar:", form);
-        createProducto(form);
-        setSaved(true);
+
+        createProducto(form)
+        .then((response) => {
+            console.log("Producto creado:", response);
+            setSaved(true);
+            setError("");
+        })
+        .catch((err) => {
+            setError(err.message || "Error al registrar el producto.");
+            setSaved(false);
+        })
+        .finally(() => {
+            console.log("Proceso de agregar producto finalizado");
+        });
         setTimeout(() => setSaved(false), 3000);
     };
 
     return(
-    <div className="p-6 max-w-2xl font-sans" >
+    <div className="p-6 max-w-4xl font-sans" >
       <div className="mb-6">
         <h1 className="font-black text-foreground tracking-tight">AGREGAR PRODUCTO</h1>
         <p className="text-muted-foreground text-sm font-mono" >NUEVO REGISTRO EN CATÁLOGO</p>
@@ -46,12 +71,15 @@ export function ProductPage(){
           <span className="text-sm text-green-400 font-mono" >PRODUCTO REGISTRADO CORRECTAMENTE</span>
         </div>
       )}
+      {error && (
+        <div className="flex items-center gap-2 bg-red-950/40 border border-red-800/50 px-4 py-3 mb-6">
+          <XCircle className="w-4 h-4 text-red-400" />
+          <span className="text-sm text-red-400 font-mono font-bold">{error}</span>
+        </div>
+      )}
 
-            <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-2 gap-4">
- {/*          <Field label="Código">
-            <input type="text" className={inputCls} placeholder="ELE-009" value={form.codigo} onChange={set("codigo")} style={MONO} />
-          </Field> */}
           <Field label="Categoría">
             <select className="form-input font-mono" value={form.categoria} onChange={set("categoria")}>
               <option value="">— seleccione —</option>
@@ -87,10 +115,6 @@ export function ProductPage(){
           </Field>          
         </div>
 
-{/*         <Field label="Stock mínimo de alerta">
-          <input type="number" min="0" className={inputCls} placeholder="10" value={form.stockMin} onChange={set("stockMin")} style={MONO} />
-        </Field>
- */}
         <Field label="Descripción">
           <textarea
             rows={3}

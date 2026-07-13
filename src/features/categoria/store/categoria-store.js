@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware"; // 1. Importa el middleware
+import { persist } from "zustand/middleware"; 
 
 export const useCategoriaStore = create(
-  persist( // 2. Envuelve el create con persist
+  persist(
     (set, get) => ({
       categorias: [],
 
@@ -15,7 +15,7 @@ export const useCategoriaStore = create(
       },
     }),
     {
-      name: "categoria-storage", // 3. Nombre único en localStorage
+      name: "categoria-storage",
     }
   )
 );

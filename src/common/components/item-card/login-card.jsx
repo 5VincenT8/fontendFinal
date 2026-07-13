@@ -11,7 +11,7 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
       className="min-h-screen bg-background flex flex-col"
       style={{ fontFamily: "'Barlow', sans-serif" }}
     >
-      {/* top bar */}
+      
       <div className="border-b border-border px-6 py-3 flex items-center gap-3">
         <div className="w-2 h-2 bg-primary rounded-full" />
         <span
@@ -31,11 +31,11 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
         </div>
       </div>
 
-      {/* main content */}
+      
       <div className="flex-1 flex">
-        {/* left panel — decorative */}
+      
         <div className="hidden lg:flex flex-col justify-between w-[42%] bg-muted border-r border-border p-12 relative overflow-hidden">
-          {/* grid pattern */}
+          
           <div
             className="absolute inset-0 opacity-[0.04]"
             style={{
@@ -66,10 +66,10 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
           </div>
         </div>
 
-        {/* right panel — login form */}
+       
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="w-full max-w-sm">
-            {/* mobile logo */}
+            
             <div className="flex items-center gap-3 mb-10 lg:hidden">
               <Package className="w-8 h-8 text-primary" strokeWidth={1.5} />
               <span className="text-xl font-black tracking-tight">
@@ -111,7 +111,7 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
                 />
               </div>
 
-              {/* password */}
+              
               <div className="space-y-1.5">
                 <label
                   htmlFor="password"
@@ -146,7 +146,7 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
                 </div>
               </div>
 
-              {/* error */}
+             
               {error && (
                 <div className="flex items-center gap-2 bg-red-950/40 border border-red-800/50 px-3 py-2.5">
                   <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
@@ -159,7 +159,7 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
                 </div>
               )}
 
-              {/* submit */}
+              
               <button
                 type="submit"
                 disabled={loading}
@@ -179,7 +179,7 @@ export function LoginCard ({ username, setUsername, password, setPassword, handl
               </button>
             </form>
 
-            {/* footer */}
+            
             <div
               className="mt-10 pt-6 border-t border-border text-center text-xs text-muted-foreground"
               style={{ fontFamily: "'Share Tech Mono', monospace" }}

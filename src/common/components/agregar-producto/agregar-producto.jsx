@@ -20,9 +20,9 @@ export function AgregarProductoSection({
                 AÑADIR PRODUCTOS
             </h3>
             
-            <div className="grid grid-cols-12 gap-3 items-end">
-                {/* Buscador de Producto */}
-                <div className="col-span-6">
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+                
+                <div className="sm:col-span-6">
                     <SearchableProductSelect
                         productos={products || []} 
                         onSelectProduct={handleProductoSeleccionado}
@@ -30,8 +30,7 @@ export function AgregarProductoSection({
                     />
                 </div>
 
-                {/* Selector de Unidad */}
-                <div className="col-span-3">
+                <div className="sm:col-span-3">
                     <label className="block text-[10px] font-mono text-muted-foreground uppercase mb-1">Tipo Unidad</label>
                     <select 
                         className={inputCls} 
@@ -44,8 +43,8 @@ export function AgregarProductoSection({
                     </select>
                 </div>
 
-                {/* Input de Cantidad y Botón Añadir */}
-                <div className="col-span-3">
+                
+                <div className="sm:col-span-3">
                     <label className="block text-[10px] font-mono text-muted-foreground uppercase mb-1">Cant. Producto</label>
                     <div className="flex gap-2">
                         <input 
@@ -61,9 +60,7 @@ export function AgregarProductoSection({
                         <button 
                             type="button" 
                             onClick={() => {
-        // 🔍 Esto te dirá en la consola de inspección (F12) qué está fallando
-        console.log("📦 Datos actuales en tmpProducto:", tmpProducto);
-        agregarAlDetalle();
+                             agregarAlDetalle();
     }} 
                             className="bg-primary text-primary-foreground p-2.5 hover:bg-amber-400 transition-colors"
                         >
@@ -73,7 +70,6 @@ export function AgregarProductoSection({
                 </div>
             </div>
 
-            {/* 📈 Barra informativa de Stock Integrada */}
             {tmpProducto.idProducto && products && (
                 <div className="mt-3 text-[11px] font-mono text-muted-foreground bg-muted/40 px-3 py-1.5 border border-border/60 text-right">
                     <span>

@@ -2,7 +2,7 @@ import { ConsultaRapidaGuia } from "../../../common/components/consultas-rapidas
 import {  Package, PackagePlus, Layers, FolderPlus,
   ShoppingCart, Ban, Truck, Receipt, FileText,
   AlertTriangle, TrendingUp, Tag, Box,
-  } from "lucide-react"
+        } from "lucide-react"
 import {Link} from "react-router-dom";  
 import { StatCard } from "../../../common/components/stat-card/stat-card";
 import { useCategoriaStore } from "../../categoria/store/categoria-store";
@@ -130,7 +130,7 @@ return (
                 {["N° VENTA", "FECHA", "CLIENTE", "ITEMS", "TOTAL", "ESTADO"].map((h) => (
                 <th 
                     key={h} 
-                    // Si el header es "ITEMS", aplicamos text-center
+                   
                     className={`px-4 py-2.5 text-left text-xs text-muted-foreground ${h === "ITEMS" ? "text-center" : ""}`} 
                     style={MONO}
                 >
@@ -149,7 +149,7 @@ return (
                 <td className="px-4 py-2.5 text-foreground">
                     {clientes.find(c => c.idCliente === v.idCliente)?.nombreCliente || "S/C"}
                 </td>
-                {/* Aquí aplicamos text-center y la fuente mono para que los números estén alineados */}
+                
                 <td className="px-4 py-2.5 text-muted-foreground text-center" style={MONO}>
                     {v.detalles?.length || 0}
                 </td>

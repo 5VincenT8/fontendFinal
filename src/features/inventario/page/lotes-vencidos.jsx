@@ -16,7 +16,7 @@ export function LotesVencidos(){
 
 
     return(
-        <div className="p-6 max-w-2xl" style={{ fontFamily: "'Barlow', sans-serif" }}>
+        <div className="p-6 max-w-auto" style={{ fontFamily: "'Barlow', sans-serif" }}>
             <div className="border border-border overflow-x-auto">
                 <table className="w-full text-sm min-w-[700px]">
                     <thead>
@@ -28,14 +28,14 @@ export function LotesVencidos(){
                     </thead>
                     <tbody>
                         {loading ?(
-                            // 1. Si está cargando, muestra este mensaje
+                            
                             <tr>
                                 <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground text-sm" style={MONO}>
                                     CARGANDO LOTES VENCIDOS DESDE EL SERVIDOR...
                                 </td>
                             </tr>
                         ) : filtered.length === 0 ? (
-                            // 2. Si ya terminó de cargar y no hay nada, muestra esto
+                            
                             <tr>
                                 <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground text-sm" style={MONO}>
                                     SIN RESULTADOS
@@ -51,8 +51,8 @@ export function LotesVencidos(){
                                 <td className="px-4 py-2.5 text-muted-foreground">{p.idLote}</td>
                                 <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.fechaVencimiento}</td>
                                 <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockLote}</td>
-                                <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockLoteCaja}</td>
-                                <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{p.stockLoteCajon}</td>
+                                <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{Number(p.stockLoteCaja).toFixed(2)}</td>
+                                <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>{Number(p.stockLoteCajon).toFixed(2)}</td>
                             </tr>
                             );
                         })

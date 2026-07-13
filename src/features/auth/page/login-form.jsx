@@ -13,9 +13,9 @@ const login = useAuthStore((state) => state.login);
 const navigate= useNavigate();
 
  const handleLogin = async (e) => {
-    e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+    e.preventDefault(); 
     
-    setError(""); // Limpiamos errores previos
+    setError(""); 
 
     if (!username || !password) {
       setError("Complete todos los campos.");

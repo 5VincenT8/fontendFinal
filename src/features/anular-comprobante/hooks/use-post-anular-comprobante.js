@@ -11,10 +11,10 @@ export function usePostAnularComprobante (){
 
         try {
             const respuesta = await postAnularComprobante(data);
-            return respuesta; // Retornamos la respuesta para que el componente sepa que tuvo éxito
+            return respuesta; 
         } catch (err) {
             setError(err.message);
-            throw err; // Lanzamos el error para atraparlo en el componente si es necesario
+            throw err; 
         } finally {
             setLoading(false);
         }

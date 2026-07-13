@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useCategoriaStore } from "../store/categoria-store";
 import { crearCategoria } from "../services/post-categoria";
-import { CheckCircle,Tag } from "lucide-react";
+import { CheckCircle, Tag, XCircle } from "lucide-react";
 
 
 export function CategoriaPage(){
@@ -9,34 +9,31 @@ export function CategoriaPage(){
     const [nombreCategoria, setNombre] = useState("");
     const [loading, setLoading] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [errors, setErrors]= useState("");
 
     const {categorias,addCategoria}=useCategoriaStore()
 
 
     const handleSubmit = async (e) => {
-        console.log("Submit iniciado");
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      // 1. Llamada al servicio (la API)
-      const data = await crearCategoria({nombreCategoria}); 
-      
-      // 2. Si sale bien, actualizamos el estado global (el store)
-      addCategoria(data);
-      
-      setNombre("");
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
-    } catch (error) {
-      alert("Error capturado: " + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
     
+      e.preventDefault();
+      setLoading(true);
+      setErrors("");
+      setSaved(false);
 
+      try {
+        const data = await crearCategoria({nombreCategoria}); 
+        addCategoria(data);
+        setNombre("");
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+      } catch (error) {
+        setErrors(error.message || "Ocurio un error inesperado");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     return(
         <>
     <div className="p-6 max-w-2xl" style={{ fontFamily: "'Barlow', sans-serif" }}>
@@ -52,6 +49,13 @@ export function CategoriaPage(){
         </div>
       )}
 
+      {errors && (
+        <div className="flex items-center gap-2 bg-red-950/40 border border-red-800/50 px-4 py-3 mb-6">
+          <XCircle className="w-4 h-4 text-red-400" />
+          <span className="text-sm text-red-400 font-mono font-bold">{errors}</span>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-5 mb-8">
         <div className="space-y-1.5">
           <label className="block text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground font-mono" >Nombre</label>
@@ -64,16 +68,7 @@ export function CategoriaPage(){
             required
           />
         </div>
-{/*         <div className="space-y-1.5">
-          <label className="block text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground font-mono" >Descripción (opcional)</label>
-          <textarea
-            rows={2}
-            className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground px-4 py-2.5 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
-            placeholder="Descripción breve..."
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-          />
-        </div> */}
+
         <button type="submit" className="bg-primary text-primary-foreground font-black text-sm tracking-[0.15em] uppercase px-8 py-3 hover:bg-amber-400 transition-colors">
           {loading ? "REGISTRANDO..." : "REGISTRAR CATEGORÍA"}
         </button>

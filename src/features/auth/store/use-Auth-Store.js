@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware'; // 1. Importa el middleware
+import { persist } from 'zustand/middleware'; 
 
 export const useAuthStore = create(
   persist(
@@ -11,7 +11,7 @@ export const useAuthStore = create(
       logout: () => set({ isAuthenticated: false, loginAt: null}),
     }),
     {
-      name: 'auth-storage', // 2. Nombre del storage en el navegador
+      name: 'auth-storage', 
     }
   )
 );
