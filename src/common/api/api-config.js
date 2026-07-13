@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://almacen-backend-o4yo.onrender.com/api/v1/almacen';
+export const VITA_API_BASE_URL = import.meta.env.VITA_API_BASE_URL;

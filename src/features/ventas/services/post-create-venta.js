@@ -1,9 +1,9 @@
-import { API_BASE_URL } from "../../../common/api/api-config";
+import { VITA_API_BASE_URL } from "../../../common/api/api-config";
 
 export const createVenta = async(data)=>{
 
    
-    const response=await fetch(`${API_BASE_URL}/ventas`,{
+    const response=await fetch(`${VITA_API_BASE_URL}/ventas`,{
     method: "POST", 
     headers: {
       "Content-Type": "application/json",

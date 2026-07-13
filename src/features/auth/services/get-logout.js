@@ -1,8 +1,8 @@
-import { API_BASE_URL } from "../../../common/api/api-config";
+import { VITA_API_BASE_URL } from "../../../common/api/api-config";
 
 export const getLogout = async()=>{
 
-    const response = await fetch(`${API_BASE_URL}/auth/logout`, {
+    const response = await fetch(`${VITA_API_BASE_URL}/auth/logout`, {
     method: 'POST',
     credentials:'include',
     });

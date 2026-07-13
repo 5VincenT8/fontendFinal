@@ -1,9 +1,9 @@
-import { API_BASE_URL } from "../../../common/api/api-config";
+import { VITA_API_BASE_URL } from "../../../common/api/api-config";
 
 export const getPreviewFacturacion = async(idVenta)=>{
 
    
-    const response=await fetch(`${API_BASE_URL}/previsualizar/${idVenta}`,{
+    const response=await fetch(`${VITA_API_BASE_URL}/previsualizar/${idVenta}`,{
     method: "GET", 
     headers: {
       "Content-Type": "application/json",

@@ -1,7 +1,7 @@
-import { API_BASE_URL } from "../../../common/api/api-config";
+import { VITA_API_BASE_URL } from "../../../common/api/api-config";
 
 export const getLoteByIdProduct = async(idProduct)=>{
-    const response= await fetch (`${API_BASE_URL}/inventario/lote/${idProduct}`,{
+    const response= await fetch (`${VITA_API_BASE_URL}/inventario/lote/${idProduct}`,{
         method: "GET", 
         headers: {
         "Content-Type": "application/json",

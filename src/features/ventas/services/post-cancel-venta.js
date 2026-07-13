@@ -1,9 +1,10 @@
-import { API_BASE_URL } from "../../../common/api/api-config";
+import { VITA_API_BASE_URL } from "../../../common/api/api-config";
+
 
 export const CancelVentaById = async(id)=>{
 
    
-    const response=await fetch(`${API_BASE_URL}/ventas/${id}/anular`,{
+    const response=await fetch(`${VITA_API_BASE_URL}/ventas/${id}/anular`,{
     method: "POST", 
     headers: {
       "Content-Type": "application/json",

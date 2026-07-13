@@ -1,9 +1,9 @@
-import { API_BASE_URL } from "../../../common/api/api-config";
+import { VITA_API_BASE_URL } from "../../../common/api/api-config";
 
 
 export const getLogin = async (username, password) => {
 
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+  const response = await fetch(`${VITA_API_BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
