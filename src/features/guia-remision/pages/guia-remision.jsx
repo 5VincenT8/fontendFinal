@@ -49,7 +49,7 @@ export function GuiaRemisionPage() {
         }
     };
     const ventasFiltradas = (ventasObtenidas || [])
-        .filter(v => v.estado === "REGISTRADO" ||v.estado === "FINALIZADO") // <-- Ojo: verifica que tu backend devuelva "estado" en minúsculas
+        .filter(v => v.estado === "REGISTRADO" ||v.estado === "FINALIZADO") 
         .sort((a, b) => b.idVenta - a.idVenta);
     
 
@@ -88,11 +88,11 @@ export function GuiaRemisionPage() {
                                         </span>
                                     </div>
                                     <span className="font-semibold text-foreground tracking-wide uppercase text-sm truncate">
-                                        {clientes.find(c => c.idCliente === v.idCliente)?.nombreCliente || "SIN CLIENTE"}
+                                        {(clientes || []).find(c => c.idCliente === v.idCliente)?.nombreCliente || "SIN CLIENTE"}
                                     </span>
                                 </div>
 
-                                {/* Monto y Acción */}
+                                
                                 <div className="flex items-center justify-between sm:justify-end gap-6 border-t sm:border-t-0 pt-3 sm:pt-0 border-border">
                                     <span className="text-primary font-bold text-lg font-mono tracking-wide">
                                         S/ {v.montoTotal}
