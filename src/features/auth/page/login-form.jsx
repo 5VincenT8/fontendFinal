@@ -27,13 +27,15 @@ const navigate= useNavigate();
     try {
       const response = await getLogin(username,password);
       login(response.role)
-      navigate('/home', { replace: true });
+      setTimeout(() => {
+        navigate('/home', { replace: true });
+      }, 300);
       
     } catch (error) {
       console.error("Error al conectar con el servidor:", error);
       alert(error.message);
     }finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 300);
     }
   }; 
 

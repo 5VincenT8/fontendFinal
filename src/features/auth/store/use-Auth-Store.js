@@ -6,7 +6,8 @@ export const useAuthStore = create(
     (set) => ({
       isAuthenticated: false,
       loginAt: null,
-      login: () => set({ isAuthenticated: true,loginAt: Date.now()}),
+      login: () => {
+        set({ isAuthenticated: true,loginAt: Date.now()})},
       logout: () => set({ isAuthenticated: false, loginAt: null}),
     }),
     {
