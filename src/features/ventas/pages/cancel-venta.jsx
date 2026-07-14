@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle, RefreshCw, AlertTrianglev } from "lucide-react";
+import { CheckCircle, RefreshCw, AlertTriangle } from "lucide-react";
 import { useGetAllVentas } from "../hooks/use-get-all-ventas";
 import { usePostCancelVenta } from "../hooks/use-post-cancel-venta";
 
