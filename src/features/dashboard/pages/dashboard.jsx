@@ -10,7 +10,7 @@ import { useGetReportProducts } from "../../inventario/hooks/use-get-reporte-pro
 import { useGetAllVentas } from "../../ventas/hooks/use-get-all-ventas";
 import { navGroups } from "../../../common/components/sidebar/nav-config";
 import { useGetAllClients } from "../../clientes/hooks/use-get-all-client";
-const MONO = { fontFamily: "'Share Tech Mono', monospace" };
+
 
 export function DashboardPage(){
     
@@ -36,6 +36,7 @@ export function DashboardPage(){
     const hoyFiltro = new Date().toISOString().split('T')[0];
 
     const ventasHoy = (ventasObtenidas || []).filter(v => v.fechaEmision?.startsWith(hoyFiltro));
+    console.log(ventasHoy);
     const totalHoy = ventasHoy.reduce((acc, v) => acc + (Number(v.montoTotal) || 0), 0);
     const productBajoSotck  = (products||[]).filter(p=>p.stockTotal<=100);
     const alertas=productBajoSotck.length;
@@ -45,7 +46,7 @@ return (
       
       <div>
         <h1 className="font-black text-foreground tracking-tight">PANEL PRINCIPAL</h1>
-        <p className="text-muted-foreground text-sm" style={MONO}>
+        <p className="text-muted-foreground text-sm font-mono">
           {new Date().toLocaleDateString("es-PE", { weekday: "long", year: "numeric", month: "long", day: "numeric" }).toUpperCase()}
         </p>
       </div>
@@ -66,7 +67,7 @@ return (
         <StatCard
           icon={<Tag className="w-5 h-5 text-blue-400" />}
           label="CATEGORÍAS"
-          value={String(categorias.length)}
+          value={String(categorias.length||0)}
           sub="activas"
         />
         <StatCard
@@ -82,7 +83,7 @@ return (
     <div className="bg-red-950/30 border border-red-800/40 p-4">
         <div className="flex items-center gap-2 mb-3">
         <AlertTriangle className="w-4 h-4 text-red-400" />
-        <span className="text-xs font-semibold text-red-400 tracking-widest" style={MONO}>
+        <span className="text-xs font-semibold text-red-400 tracking-widest font-mono" >
             ALERTA DE STOCK BAJO
         </span>
         </div>
@@ -91,7 +92,7 @@ return (
             <div key={p.idProduct} className="flex items-center justify-between text-sm">
             <span className="text-foreground">{p.nombre} — <span className="text-foreground">{p.marca}</span>
             </span>
-            <span className="text-red-400" style={MONO}>
+            <span className="text-red-400 font-mono" >
                 {p.stockTotal} unidades - {p.totalCajas} cajas - {p.totalCajones} cajones — mín. {100}
             </span>
             </div>
@@ -101,7 +102,7 @@ return (
     )}
 
         <div>
-            <div className="text-xs text-muted-foreground tracking-widest mb-3" style={MONO}>ACCESO RÁPIDO</div>
+            <div className="text-xs text-muted-foreground tracking-widest mb-3 font-mono">ACCESO RÁPIDO</div>
             <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
             {quickLinks.map(({ path, icon: Icon, label, color }) => (
                 <Link
@@ -116,13 +117,13 @@ return (
             </div>
         </div>
       
-        <div className="text-xs text-muted-foreground tracking-widest mb-3" style={MONO}>CONSULTA RÁPIDA
+        <div className="text-xs text-muted-foreground tracking-widest mb-3 font-mono">CONSULTA RÁPIDA
         </div>    
         <div className="max-w-md">
             <ConsultaRapidaGuia />
         </div>
 
-        <div className="text-xs text-muted-foreground tracking-widest mb-3" style={MONO}>VENTAS RECIENTES</div>
+        <div className="text-xs text-muted-foreground tracking-widest mb-3 font-mono" >VENTAS RECIENTES</div>
         <div className="border border-border overflow-hidden rounded-lg">
         <table className="w-full text-sm">
             <thead>
@@ -131,8 +132,7 @@ return (
                 <th 
                     key={h} 
                    
-                    className={`px-4 py-2.5 text-left text-xs text-muted-foreground ${h === "ITEMS" ? "text-center" : ""}`} 
-                    style={MONO}
+                    className={`px-4 py-2.5 text-left text-xs text-muted-foreground ${h === "ITEMS" ? "text-center font-mono" : ""}`} 
                 >
                     {h}
                 </th>
@@ -142,28 +142,27 @@ return (
             <tbody>
             {(ventasObtenidas || []).slice(-5).reverse().map((v) => (
                 <tr key={v.idVenta} className="border-b border-border last:border-0 hover:bg-card/50 transition-colors">
-                <td className="px-4 py-2.5 text-primary" style={MONO}>{v.idVenta}</td>
-                <td className="px-4 py-2.5 text-muted-foreground" style={MONO}>
+                <td className="px-4 py-2.5 text-primary font-mono" >{v.idVenta}</td>
+                <td className="px-4 py-2.5 text-muted-foreground font-mono" >
                     {new Date(v.fechaEmision).toLocaleDateString()}
                 </td>
                 <td className="px-4 py-2.5 text-foreground">
-                    {clientes.find(c => c.idCliente === v.idCliente)?.nombreCliente || "S/C"}
+                    {(clientes || []).find(c => c.idCliente === v.idCliente)?.nombreCliente || "S/C"}
                 </td>
                 
-                <td className="px-4 py-2.5 text-muted-foreground text-center" style={MONO}>
+                <td className="px-4 py-2.5 text-muted-foreground text-center font-mono">
                     {v.detalles?.length || 0}
                 </td>
-                <td className="px-4 py-2.5 text-foreground font-semibold" style={MONO}>
+                <td className="px-4 py-2.5 text-foreground font-semibold font-mono">
                     S/ {Number(v.montoTotal).toFixed(2)}
                 </td>
                 <td className="px-4 py-2.5">
                     <span
-                    className={`text-[10px] px-2 py-0.5 rounded ${
+                    className={`font-mono text-[10px] px-2 py-0.5 rounded ${
                         v.estado === "REGISTRADO"
                         ? "bg-green-950/30 text-green-400 border border-green-800/40"
                         : "bg-red-950/30 text-red-400 border border-red-800/40"
                     }`}
-                    style={MONO}
                     >
                     {v.estado?.toUpperCase()}
                     </span>
@@ -173,9 +172,6 @@ return (
             </tbody>
         </table>
         </div>
-
-
-
     </div>
     );
 }

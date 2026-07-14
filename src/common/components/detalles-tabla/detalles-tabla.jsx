@@ -26,11 +26,11 @@ export function DetallesTablaSection({ formVenta, products, productosPrecios, el
                     ) : (
                         formVenta.detalles.map((item, index) => {
                             
-                            const prodAsociado = products?.find(
+                            const prodAsociado =( products || []).find(
                                 (p) => String(p.idProduct || p.idProducto) === String(item.idProducto)
                             );
                             
-                            const prodPrecio = productosPrecios?.find(
+                            const prodPrecio = (productosPrecios ||[]).find(
                                 (p) => String(p.id) === String(item.idProducto)
                             );
 
